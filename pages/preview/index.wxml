@@ -1,0 +1,27 @@
+<view class="body">
+  <view class="preview">
+    <video wx:if="{{video}}" src="{{video}}" objectFit="cover"></video>
+    <!-- <movable-area wx:else style="">
+      <movable-view style="background:#111;width:{{imagew}}px;height:{{imageh}}px" direction="all" bindchange="onChange" bindscale="onScale" scale scale-min='0.1' scale-max="10" inertia   >
+        <image src="{{image}}" mode="aspectFill" style="width:{{imagew}}px;height:{{imageh}}px"></image>
+      </movable-view>
+    </movable-area> -->
+    <image wx:else src="{{image}}" mode="aspectFill"></image>
+  </view>
+
+  <view class="row" wx:if="{{filePath}}">
+    <view class="col">
+      {{info.width}} X {{info.height}} {{info.type}}
+    </view>
+  </view>
+  <view class="row" wx:if="{{filePath}}">
+    <view class="col">
+      <navigator url="/pages/album/index">
+        <button type="default">相册</button>
+      </navigator>
+    </view>
+    <view class="col">
+      <button type="primary" bind:tap="uploadFile">上传</button>
+    </view>
+  </view>
+</view>

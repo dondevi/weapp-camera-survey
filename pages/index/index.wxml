@@ -1,0 +1,51 @@
+<view class="body">
+
+  <view class="row">
+    <view class="col">
+      <image class="icon" src="/images/flash-{{flash.value}}.png" bind:tap="switchFlash"></image>
+    </view>
+    <view class="col">
+      质量：<text class="active" bind:tap="switchQuality">{{quality.label}}</text>
+      <text space="ensp">　</text>
+      滤镜：<text class="active" bind:tap="switchFilter">{{filter.label}}</text>
+      <!-- <text space="ensp">　</text> -->
+      <!-- 模式：<text class="active" bind:tap="switchMode">{{mode.label}}</text> -->
+    </view>
+    <view class="col">
+      <image class="icon" src="/images/camera-switch.png" bind:tap="switchCamera"></image>
+    </view>
+  </view>
+
+  <camera device-position="{{position}}" flash="{{flash.value}}" bind:error="error"
+          mode="{{mode.value}}" filter="{{filter.value}}" _box="{{_box}}"
+          need-output="{{true}}" bindoutput="cameraOutput"></camera>
+
+  <view class="row">
+    <view class="col">
+      <text class="{{'photo' === type ? 'active' : ''}}" data-type="photo" bind:tap="changeType">PHOTO</text>
+      <text space="emsp">　</text>
+      <text class="{{'video' === type ? 'active' : ''}}" data-type="video" bind:tap="changeType">VEDIO</text>
+    </view>
+  </view>
+  <view class="row">
+    <view class="col">
+      <navigator url="/pages/preview/index" wx:if="{{preview}}">
+        <image class="preview" src="{{preview}}" mode="aspectFill"></image>
+      </navigator>
+      <image class="preview" wx:else></image>
+    </view>
+    <view class="col">
+      <button class="shoot" type="{{ 'video' === type ? 'warn' : ''}}"
+              bind:tap="shoot" loading="{{shooting}}" disabled='{{shooting}}'>
+        <text wx:if="{{recording}}">{{timer}}</text>
+      </button>
+    </view>
+    <view class="col">
+      <button wx:if="{{canApp}}" type="primary" size="mini" plain
+              open-type="launchApp" app-parameter="wechat"
+              bind:error="error">打开APP</button>
+    </view>
+  </view>
+  <!-- <view class="footer">
+  </view> -->
+</view>

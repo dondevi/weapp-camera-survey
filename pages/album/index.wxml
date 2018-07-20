@@ -1,0 +1,21 @@
+<view class="body">
+  <view class="row">
+    <view class="col">
+      <button type="primary" size="mini" plain bind:tap="chooseImage"
+              disabled='{{picking}}'>+相片</button>
+      <button type="warn" size="mini" plain bind:tap="chooseVideo"
+              disabled='{{taking}}'>+视频</button>
+      <button type="primary" size="mini" bind:tap="uploads"
+              disabled='{{taking}}'>上传</button>
+    </view>
+  </view>
+  <view class="main">
+    <view wx:for="{{mediaList}}" wx:key="item.image">
+      <video wx:if="{{item.video && !item.image}}" src="{{item.video}}"
+             objectFit="cover" controls="{{false}}" show-center-play-btn="{{false}}"
+             bindtouchstart="prevent"></video>
+      <image wx:else src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+      <cover-view data-index="{{index}}" bind:tap="preview"></cover-view>
+    </view>
+  </view>
+</view>
